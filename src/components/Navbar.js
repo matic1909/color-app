@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Snackbar, Select, MenuItem, IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import Slider from 'rc-slider';
