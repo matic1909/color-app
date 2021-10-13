@@ -10,12 +10,12 @@ export default function Navbar({ level, changeLevel, handleFormatChange }) {
 
   useEffect(() => {
     handleFormatChange(format);
-  }, [format]);
+  }, [format, handleFormatChange]);
 
   return (
     <header className="Navbar">
       <div className="logo">
-        <a href="#">reactcolorpicker</a>
+        <a href="/">reactcolorpicker</a>
       </div>
       <div className="slider-container">
         <span>Level: {level}</span>
