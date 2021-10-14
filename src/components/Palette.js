@@ -15,9 +15,14 @@ export default function Palette({ palette }) {
     setFormat(val);
   };
 
-  const { colors, paletteName, emoji } = palette;
+  const { colors, paletteName, emoji, id } = palette;
   const colorBoxes = colors[level].map((color) => (
-    <ColorBox background={color[format]} name={color.name} key={color.id} />
+    <ColorBox
+      background={color[format]}
+      name={color.name}
+      key={color.id}
+      moreUrl={`/palette/${id}/${color.id}`}
+    />
   ));
   return (
     <div className="Palette">
