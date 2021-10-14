@@ -1,40 +1,35 @@
 import { useHistory } from 'react-router';
-import { withStyles } from '@material-ui/core';
 import MiniPalette from './MiniPalette';
+import styled from 'styled-components';
 
-const styles = {
-  root: {
-    backgroundColor: 'blue',
-    height: '100vh',
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-  },
+const PaletteListStyles = styled.div`
+  background-color: blue;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  .container {
+    width: 50%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    color: white;
+  }
+  .palettes {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    grid-gap: 5%;
+  }
+`;
 
-  container: {
-    width: '50%',
-    display: 'flex',
-    alignItems: 'flex-start',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-  },
-
-  nav: {
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'space-between',
-    color: 'white',
-  },
-
-  palettes: {
-    width: '100%',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 30%)',
-    gridGap: '5%',
-  },
-};
-
-function PaletteList({ classes, palettes }) {
+function PaletteList({ palettes }) {
   const history = useHistory();
 
   const goToPalette = (id) => {
@@ -42,19 +37,19 @@ function PaletteList({ classes, palettes }) {
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.container}>
-        <nav className={classes.nav}>
+    <PaletteListStyles>
+      <div className="container">
+        <nav className="nav">
           <h1>React Colors</h1>
         </nav>
-        <div className={classes.palettes}>
+        <div className="palettes">
           {palettes.map((palette) => (
             <MiniPalette {...palette} handleClick={goToPalette} />
           ))}
         </div>
       </div>
-    </div>
+    </PaletteListStyles>
   );
 }
 
-export default withStyles(styles)(PaletteList);
+export default PaletteList;

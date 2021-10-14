@@ -3,8 +3,35 @@ import { Snackbar, Select, MenuItem, IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import './Navbar.css';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const NavbarStyles = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 6vh;
+  .logo {
+    margin-right: 15px;
+    padding: 0 13px;
+    font-size: 22px;
+    background-color: #eceff1;
+    font-family: Roboto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo a {
+    text-decoration: none;
+    color: black;
+  }
+  .slider {
+    width: 340px;
+    margin: 0 10px;
+    display: inline-block;
+  }
+`;
 
 export default function Navbar({
   level,
@@ -30,7 +57,7 @@ export default function Navbar({
   };
 
   return (
-    <header className="Navbar">
+    <NavbarStyles>
       <div className="logo">
         <Link to="/">reactcolorpicker</Link>
       </div>
@@ -86,6 +113,6 @@ export default function Navbar({
           </IconButton>,
         ]}
       />
-    </header>
+    </NavbarStyles>
   );
 }
