@@ -11,6 +11,11 @@ export const Navbar = styled.header`
     margin: 0 10px;
     display: inline-block;
   }
+
+  .select-container {
+    margin-left: auto;
+    margin-right: 10px;
+  }
 `;
 
 export const Logo = styled.div`

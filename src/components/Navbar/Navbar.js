@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Snackbar, Select, MenuItem, IconButton } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+import { Snackbar, Box, Select, MenuItem, IconButton } from '@mui/material';
+import { Close } from '@mui/icons-material';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import * as Styled from './NavbarStyles';
+import * as Styled from './styles';
 
 export default function Navbar({
   level,
@@ -59,13 +59,13 @@ export default function Navbar({
           </Styled.Slider>
         </div>
       )}
-      <div className="select-container">
+      <Box sx={{ minWidth: 120 }} className="select-container">
         <Select value={format} onChange={(e) => setFormat(e.target.value)}>
           <MenuItem value="hex">HEX - #ffffff</MenuItem>
           <MenuItem value="rgb">RGB - rgb(255, 255, 255)</MenuItem>
           <MenuItem value="rgba">RGBA - rgba(255, 255, 255, 1.0)</MenuItem>
         </Select>
-      </div>
+      </Box>
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         open={snackbarOpen}
