@@ -1,18 +1,8 @@
 import { useState } from 'react';
-import styled from 'styled-components';
-import ColorBox from './ColorBox';
-import Navbar from './Navbar';
+import ColorBox from '../ColorBox/ColorBox';
+import Navbar from '../Navbar/Navbar';
 import PaletteFooter from './PaletteFooter';
-
-const PaletteStyles = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-
-  .colors {
-    height: 90vh;
-  }
-`;
+import * as Styled from './styles';
 
 export default function Palette({ palette }) {
   const [level, setLevel] = useState(500);
@@ -36,7 +26,7 @@ export default function Palette({ palette }) {
     />
   ));
   return (
-    <PaletteStyles>
+    <Styled.Palette>
       <Navbar
         level={level}
         changeLevel={changeLevel}
@@ -45,6 +35,6 @@ export default function Palette({ palette }) {
       />
       <div className="colors">{colorBoxes}</div>
       <PaletteFooter paletteName={paletteName} emoji={emoji} />
-    </PaletteStyles>
+    </Styled.Palette>
   );
 }

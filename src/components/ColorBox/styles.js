@@ -1,13 +1,10 @@
-import { useState } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import chroma from 'chroma-js';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-const ColorBoxStyles = styled.div`
-  background-color: ${(props) => props.background};
+export const ColorBox = styled.div`
+  background-color: ${(p) => p.background};
   width: 20%;
-  height: ${(props) => (props.moreUrl ? '25%' : '50%')};
+  height: ${(p) => (p.moreUrl ? '25%' : '50%')};
   margin: 0 auto;
   display: inline-block;
   cursor: pointer;
@@ -18,8 +15,8 @@ const ColorBoxStyles = styled.div`
     transition: 0.5s;
   }
   .copy-text {
-    color: ${(props) =>
-      chroma(props.background).luminance() >= 0.7 ? 'black' : 'white'};
+    color: ${(p) =>
+      chroma(p.background).luminance() >= 0.7 ? 'black' : 'white'};
   }
   .copy-button {
     width: 100px;
@@ -35,8 +32,8 @@ const ColorBoxStyles = styled.div`
     background: rgba(255, 255, 255, 0.3);
     line-height: 30px;
     font-size: 1rem;
-    color: ${(props) =>
-      chroma(props.background).luminance() >= 0.7 ? 'black' : 'white'};
+    color: ${(p) =>
+      chroma(p.background).luminance() >= 0.7 ? 'black' : 'white'};
     text-transform: uppercase;
     border: none;
     text-decoration: none;
@@ -67,12 +64,12 @@ const ColorBoxStyles = styled.div`
     text-transform: uppercase;
   }
   .color-name {
-    color: ${(props) =>
-      chroma(props.background).luminance() <= 0.075 ? 'white' : 'black'};
+    color: ${(p) =>
+      chroma(p.background).luminance() <= 0.075 ? 'white' : 'black'};
   }
 `;
 
-const CopyMessageStyles = styled.div`
+export const CopyMessage = styled.div`
   flex-direction: column;
   position: fixed;
   left: 0;
@@ -112,7 +109,7 @@ const CopyMessageStyles = styled.div`
   }
 `;
 
-const CopyOverlayStyles = styled.div`
+export const CopyOverlay = styled.div`
   opacity: 0;
   z-index: 0;
   width: 100%;
@@ -127,40 +124,3 @@ const CopyOverlayStyles = styled.div`
     position: absolute;
   }
 `;
-
-function ColorBox({ name, background, moreUrl }) {
-  const [copied, setCopied] = useState(false);
-
-  const changeCopyState = () => {
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  };
-
-  return (
-    <CopyToClipboard text={background} onCopy={changeCopyState}>
-      <ColorBoxStyles background={background} moreUrl={moreUrl}>
-        <CopyOverlayStyles
-          style={{ background }}
-          className={copied && 'show'}
-        ></CopyOverlayStyles>
-        <CopyMessageStyles className={`${copied && 'show'}`}>
-          <h1>copied!</h1>
-          <p className="copy-text">{background}</p>
-        </CopyMessageStyles>
-        <div className="copy-container">
-          <div className="box-content">
-            <span className="color-name">{name}</span>
-          </div>
-          <button className="copy-button">Copy</button>
-        </div>
-        {moreUrl && (
-          <Link to={moreUrl} onClick={(e) => e.stopPropagation()}>
-            <span className="see-more">MORE</span>
-          </Link>
-        )}
-      </ColorBoxStyles>
-    </CopyToClipboard>
-  );
-}
-
-export default ColorBox;

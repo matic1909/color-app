@@ -1,37 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Snackbar, Select, MenuItem, IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
-const NavbarStyles = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  height: 6vh;
-  .logo {
-    margin-right: 15px;
-    padding: 0 13px;
-    font-size: 22px;
-    background-color: #eceff1;
-    font-family: Roboto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-
-  .logo a {
-    text-decoration: none;
-    color: black;
-  }
-  .slider {
-    width: 340px;
-    margin: 0 10px;
-    display: inline-block;
-  }
-`;
+import * as Styled from './NavbarStyles';
 
 export default function Navbar({
   level,
@@ -57,14 +30,14 @@ export default function Navbar({
   };
 
   return (
-    <NavbarStyles>
-      <div className="logo">
+    <Styled.Navbar>
+      <Styled.Logo className="logo">
         <Link to="/">reactcolorpicker</Link>
-      </div>
+      </Styled.Logo>
       {showingAllColors && (
         <div className="slider-container">
           <span>Level: {level}</span>
-          <div className="slider">
+          <Styled.Slider className="slider">
             <Slider
               defaultValue={level}
               min={100}
@@ -83,7 +56,7 @@ export default function Navbar({
                 marginTop: '-3px',
               }}
             />
-          </div>
+          </Styled.Slider>
         </div>
       )}
       <div className="select-container">
@@ -113,6 +86,6 @@ export default function Navbar({
           </IconButton>,
         ]}
       />
-    </NavbarStyles>
+    </Styled.Navbar>
   );
 }

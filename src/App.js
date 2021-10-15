@@ -1,9 +1,9 @@
 import { Route, Switch } from 'react-router-dom';
-import Palette from './components/Palette';
-import PaletteList from './components/PaletteList';
+import Palette from './components/Palette/Palette';
+import PaletteList from './components/PaletteList/PaletteList';
 import seedColors from './seedColors';
 import { generatePalette } from './colorHelpers';
-import SingleColorPalette from './components/SingleColorPalette';
+import SingleColorPalette from './components/Palette/SingleColorPalette';
 
 function App() {
   const findPalette = (id) => {
