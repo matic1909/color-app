@@ -1,5 +1,5 @@
-import React from 'react';
-import { styled } from '@mui/material/styles';
+import { useState } from 'react';
+import { styled, useTheme } from '@mui/material/styles';
 import {
   Box,
   Drawer,
@@ -9,13 +9,15 @@ import {
   Typography,
   Divider,
   IconButton,
+  Button,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
 } from '@mui/icons-material';
+import { ChromePicker } from 'react-color';
 
-const drawerWidth = 240;
+const drawerWidth = 400;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -63,7 +65,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function NewPaletteForm() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [color, setColor] = useState('teal');
+  const [colors, setColors] = useState(['purple', 'red']);
+  const theme = useTheme();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -71,6 +76,14 @@ export default function NewPaletteForm() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const updateColor = (newColor) => {
+    setColor(newColor.hex);
+  };
+
+  const addNewColor = () => {
+    setColors([...colors, color]);
   };
 
   return (
@@ -111,8 +124,36 @@ export default function NewPaletteForm() {
           </IconButton>
         </DrawerHeader>
         <Divider />
+        <Typography variant="h4">Design your palette</Typography>
+        <div>
+          <Button variant="contained" color="secondary">
+            Clear palette
+          </Button>
+          <Button variant="contained" color="primary">
+            Random Color
+          </Button>
+        </div>
+        <ChromePicker
+          value={color}
+          onChangeComplete={(newColor) => updateColor(newColor)}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: color }}
+          onClick={addNewColor}
+        >
+          Add Color
+        </Button>
       </Drawer>
-      <Main></Main>
+      <Main open={open}>
+        <DrawerHeader />
+        <ul>
+          {colors.map((c) => (
+            <li style={{ backgroundColor: c }}>{c}</li>
+          ))}
+        </ul>
+      </Main>
     </Box>
   );
 }
