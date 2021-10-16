@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Snackbar, Box, Select, MenuItem, IconButton } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { Snackbar, Box, Select, MenuItem, IconButton } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import * as Styled from './styles';
