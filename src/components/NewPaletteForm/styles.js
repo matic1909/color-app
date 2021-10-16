@@ -9,4 +9,26 @@ export const DraggableColorBox = styled.div`
   cursor: pointer;
   position: relative;
   margin-bottom: -3.5px;
+
+  .box-content {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+    &:hover .delete-icon {
+      color: white;
+      transform: scale(1.3);
+    }
+
+    .delete-icon {
+      transition: all 0.3s ease-in-out;
+    }
+  }
 `;
