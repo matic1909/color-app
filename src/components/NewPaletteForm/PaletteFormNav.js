@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import PaletteMetaForm from './PaletteMetaForm';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,6 +9,7 @@ import Box from '@mui/material/Box';
 import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const drawerWidth = 400;
 
@@ -24,6 +24,12 @@ const AppBar = styled(MuiAppBar, {
   justifyContent: 'space-between',
   alignItems: 'center',
   height: '64px',
+  '& .nav-buttons': {
+    marginRight: '1rem',
+  },
+  '& .button': {
+    margin: '0 0.5rem',
+  },
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
@@ -35,6 +41,8 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 function PaletteFormNav({ open, palettes, handleSubmit, handleDrawerOpen }) {
+  const [formShowing, setFormShowing] = useState(false);
+
   return (
     <Box>
       <CssBaseline />
@@ -54,12 +62,25 @@ function PaletteFormNav({ open, palettes, handleSubmit, handleDrawerOpen }) {
           </Typography>
         </Toolbar>
         <div className="nav-buttons">
-          <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
           <Link to="/">
-            <Button variant="contained" color="secondary">
+            <Button className="button" variant="contained" color="secondary">
               Go Back
             </Button>
           </Link>
+          <Button
+            className="button"
+            variant="contained"
+            onClick={() => setFormShowing(true)}
+          >
+            Open form dialog
+          </Button>
+          {formShowing && (
+            <PaletteMetaForm
+              palettes={palettes}
+              handleSubmit={handleSubmit}
+              hideForm={() => setFormShowing(false)}
+            />
+          )}
         </div>
       </AppBar>
     </Box>

@@ -101,13 +101,13 @@ function NewPaletteForm({ palettes, savePalette }) {
     else setColors([...colors, randomColor]);
   };
 
-  const handleSubmit = (newPaletteName) => {
-    const newPalette = {
-      paletteName: newPaletteName,
-      id: newPaletteName.toLowerCase().replace(/ /g, '-'),
+  const handleSubmit = (newPalette) => {
+    const toAdd = {
+      ...newPalette,
+      id: newPalette.paletteName.toLowerCase().replace(/ /g, '-'),
       colors,
     };
-    savePalette(newPalette);
+    savePalette(toAdd);
     history.push('/');
   };
 
