@@ -32,3 +32,22 @@ export const DraggableColorBox = styled.div`
     }
   }
 `;
+
+export const ColorPickerForm = styled.div`
+  .picker {
+    width: 100% !important;
+    margin-top: 2rem;
+  }
+
+  .add-color {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    font-size: 2rem;
+  }
+
+  .color-name-input {
+    width: 100%;
+    height: 70px;
+  }
+`;
