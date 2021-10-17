@@ -19,8 +19,8 @@ const maxColors = 20;
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
-    height: '100vh',
-    padding: theme.spacing(3),
+    height: 'calc(100vh - 64px)',
+    padding: 0,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -60,7 +60,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 function NewPaletteForm({ palettes, savePalette }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [colors, setColors] = useState(palettes[0].colors);
   const history = useHistory();
 
@@ -112,9 +112,7 @@ function NewPaletteForm({ palettes, savePalette }) {
   };
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    setColors((colors) => ({
-      colors: arrayMove(colors, oldIndex, newIndex),
-    }));
+    setColors(arrayMove(colors, oldIndex, newIndex));
   };
 
   const paletteFull = colors.length >= maxColors;

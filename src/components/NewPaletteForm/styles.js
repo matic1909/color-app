@@ -8,7 +8,7 @@ export const DraggableColorBox = styled.div`
   display: inline-block;
   cursor: pointer;
   position: relative;
-  margin-bottom: -3.5px;
+  margin-bottom: -6px;
 
   .box-content {
     display: flex;
