@@ -1,103 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import classNames from 'classnames';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Button from '@material-ui/core/Button';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { styled } from '@mui/material/styles';
+import PaletteMetaForm from './PaletteMetaForm';
+import CssBaseline from '@mui/material/CssBaseline';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Box from '@mui/material/Box';
+import MenuIcon from '@mui/icons-material/Menu';
+import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 400;
 
-const styles = (theme) => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: '64px',
-  },
-  appBarShift: {
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  height: '64px',
+  ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    marginLeft: `${drawerWidth}px`,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 20,
-  },
-  navButtons: {},
-});
+  }),
+}));
 
-function PaletteFormNav({
-  classes,
-  open,
-  palettes,
-  handleSubmit,
-  handleDrawerOpen,
-}) {
-  const [newPaletteName, setNewPaletteName] = useState('');
-
-  useEffect(() => {
-    ValidatorForm.addValidationRule('isPaletteNameUnique', (value) =>
-      palettes.every(
-        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-      )
-    );
-  }, []);
-
+function PaletteFormNav({ open, palettes, handleSubmit, handleDrawerOpen }) {
   return (
-    <div>
+    <Box>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        color="default"
-        className={classNames(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar disableGutters={!open}>
+      <AppBar position="fixed" open={open} color="default">
+        <Toolbar>
           <IconButton
             color="inherit"
-            aria-label="Open drawer"
+            aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={classNames(classes.menuButton, open && classes.hide)}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit" noWrap>
+          <Typography variant="h6" noWrap component="div">
             Create a Palette
           </Typography>
         </Toolbar>
-        <div className={classes.navButtons}>
-          <ValidatorForm onSubmit={() => handleSubmit(newPaletteName)}>
-            <TextValidator
-              label="Palette Name"
-              name="newPaletteName"
-              value={newPaletteName}
-              onChange={(e) => setNewPaletteName(e.target.value)}
-              validators={['required', 'isPaletteNameUnique']}
-              errorMessages={[
-                'Enter palette name',
-                'Palette name already used',
-              ]}
-            />
-            <Button type="submit" variant="contained" color="primary">
-              Save Palette
-            </Button>
-          </ValidatorForm>
+        <div className="nav-buttons">
+          <PaletteMetaForm palettes={palettes} handleSubmit={handleSubmit} />
           <Link to="/">
             <Button variant="contained" color="secondary">
               Go Back
@@ -105,8 +62,8 @@ function PaletteFormNav({
           </Link>
         </div>
       </AppBar>
-    </div>
+    </Box>
   );
 }
 
-export default withStyles(styles, { withTheme: true })(PaletteFormNav);
+export default PaletteFormNav;
