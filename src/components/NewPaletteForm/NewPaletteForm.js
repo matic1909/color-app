@@ -12,8 +12,8 @@ import { useHistory } from 'react-router';
 import { arrayMove } from 'react-sortable-hoc';
 import ColorPickerForm from './ColorPickerForm';
 import DraggableColorList from './DraggableColorList';
+import { DRAWER_WIDTH } from '../../constants';
 
-const drawerWidth = 400;
 const maxColors = 20;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -39,7 +39,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     '& .button': {
       width: '50%',
     },
-    marginLeft: `-${drawerWidth}px`,
+    marginLeft: `-${DRAWER_WIDTH}px`,
     ...(open && {
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
@@ -126,10 +126,10 @@ function NewPaletteForm({ palettes, savePalette }) {
       />
       <Drawer
         sx={{
-          width: drawerWidth,
+          width: DRAWER_WIDTH,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
+            width: DRAWER_WIDTH,
             boxSizing: 'border-box',
           },
         }}
