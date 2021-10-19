@@ -72,7 +72,7 @@ function PaletteFormNav({ open, palettes, handleSubmit, handleDrawerOpen }) {
             variant="contained"
             onClick={() => setFormShowing(true)}
           >
-            Open form dialog
+            Add new Palette
           </Button>
           {formShowing && (
             <PaletteMetaForm

@@ -5,10 +5,16 @@ import seedColors from './seedColors';
 import { generatePalette } from './colorHelpers';
 import SingleColorPalette from './components/Palette/SingleColorPalette';
 import NewPaletteForm from './components/NewPaletteForm/NewPaletteForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [palettes, setPalettes] = useState(seedColors);
+  const [palettes, setPalettes] = useState(
+    JSON.parse(window.localStorage.getItem('palettes')) || seedColors
+  );
+
+  useEffect(() => {
+    window.localStorage.setItem('palettes', JSON.stringify(palettes));
+  }, [palettes]);
 
   const findPalette = (id) => {
     return palettes.find((palette) => palette.id === id);

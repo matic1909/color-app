@@ -4,9 +4,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { CssBaseline } from '@mui/material';
 
 ReactDOM.render(
   <Router>
+    <CssBaseline />
     <App />
   </Router>,
   document.getElementById('root')
